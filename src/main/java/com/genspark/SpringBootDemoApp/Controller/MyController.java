@@ -3,8 +3,7 @@ package com.genspark.SpringBootDemoApp.Controller;
 import com.genspark.SpringBootDemoApp.Entity.Product;
 import com.genspark.SpringBootDemoApp.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +20,29 @@ public class MyController {
     public List<Product> getProduct() {
         return this.productService.getAllProduct();
     }
+
+    @GetMapping("/products/{productID}")
+    public Product getProduct(@PathVariable String productID) {
+        return this.productService.getProductById(Integer.parseInt(productID));
+    }
+
+    @PostMapping("/product")
+    public Product addProduct(@RequestBody Product product) {
+        return this.productService.addProduct(product);
+    }
+
+    @PutMapping("/product")
+    public Product updateProduct(@RequestBody Product product) {
+        return this.productService.updateProduct(product);
+    }
+
+    public String deleteProduct(@PathVariable String productID) {
+        return this.productService.deleteProductById(Integer.parseInt(productID));
+    }
+
+
+
+
 
 
 }
